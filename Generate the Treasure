@@ -1,6 +1,6 @@
     def createTreasure(self,canvas):
         rv=random.randint(0,self.l1)
-        rn=random.randint(200,300)
+        rn=random.randint(0,300)
         self.tx1=listavoidx[rv]
         self.ty1=listavoidy[rv]
         if 0<=rn<100:
