@@ -1,10 +1,14 @@
+    def createTreasure(self,canvas):
         rv=random.randint(0,self.l1)
         rn=random.randint(200,300)
         self.tx1=listavoidx[rv]
         self.ty1=listavoidy[rv]
         if 0<=rn<100:
-            self.tr1=self.tr1=canvas.create_oval(tx1+10,self.ty1+10,tx1+20,ty1+20,fill='gold')
+            self.tr1=self.tr1=canvas.create_oval(self.tx1,self.ty1+10,self.tx1+20,self.ty1+30,fill='gold')
         if 100<=rn<200:
-            self.tr1=self.tr1=canvas.create_rectangle(tx1+10,ty1+10,tx1+20,ty1+20,fill='orange')
+            self.tr1=self.tr1=canvas.create_rectangle(self.tx1,self.ty1+10,self.tx1+20,self.ty1+30,fill='orange')
         if 200<=rn<300:
-             self.tr1=canvas.create_arc(tx1,ty1+10,tx1+20,ty1+30,fill='gold')
+             self.tr1=canvas.create_arc(self.tx1,self.ty1+10,self.tx1+20,self.ty1+30,fill='gold')
+        listvalue.append(rn)
+
+        return (self.tr1)
