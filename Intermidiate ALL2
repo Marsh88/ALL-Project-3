@@ -1,5 +1,4 @@
 
-
 import random
 import time
 import math
@@ -315,10 +314,29 @@ try1.createTreasure(canvas)
 listavoidx1=list(listavoidx)
 listavoidy1=list(listavoidy)
 for i in range (1000):
-    try1.changeTreasure()
+    try1.changeTreasure() 
     try1.roam()
     try1.traffic()
     try1.score2()
     time.sleep(0.1)
+
+canvas.delete("all")
+canvas.update()
+widget = Label(canvas, text=('The unsorted values are:',listvalue ), fg='black', bg='white')
+widget.pack()
+1x=50
+1y=100
+for vl in range(len(listvalue)):
+        if 0<=listvalue[vl]<100:
+            canvas.create_oval(1x,1y,1x+20,1y+20,fill='gold')
+        if 100<=listvalue[vl]<200:
+            self.tr1=canvas.create_rectangle (1x,1y,1x+20,1y+20,fill='orange')
+        if 200<=listvalue[vl]<300:
+            canvas.create_arc(1x,1y,1x+20,1y+20,fill='gold')
+        1x+=20
+        
+                
+canvas.update()
+
 
 window.mainloop()
