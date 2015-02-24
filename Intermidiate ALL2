@@ -1,0 +1,324 @@
+
+
+import random
+import time
+import math
+import copy
+import urllib
+import base64
+from Tkinter import*
+import Tkinter as tk
+window = Tk() 
+listavoidx=[]
+listavoidy=[]
+listvalue=[]
+ob1=1
+score=0
+score1=Label(window, text="the amount of times the treasure has be found is %s")
+# Use urllib to access a public url and import it through base64 as a .gif image usable in Tkinter (the file has to be formatted as a .gif to begin with)
+
+URL = "https://djaspermorris.files.wordpress.com/2015/01/seawaves.gif"
+u = urllib.urlopen(URL)
+raw_data = u.read()
+u.close()
+
+
+b64_data = base64.encodestring(raw_data)
+gif1 = tk.PhotoImage(data=b64_data)
+
+# Create the canvas
+
+canvas = Canvas(width = 500, height = 400, bg = 'white')
+
+# Pack the canvas into a frame/form
+
+canvas.pack(expand = YES, fill = BOTH)
+
+# Put gif image on canvas
+# The gif image's upper left corner on the canvas is at x=0 y=0
+
+canvas.create_image(0, 0, image = gif1, anchor = NW)
+
+# Run the code)
+
+
+class object1:
+    def __init__(self,x=50,y0=50,sizex=30,sizey=30,colour='dark green'):
+        self.x0=x0
+        self.y0=y0
+        self.sizex1=sizex
+        self.sizey1=sizey
+        self.colour=colour
+
+
+#this creates the obstacles through random generation
+    def drawObstacle(self, canvas):
+        self.l1=len(listavoidx)
+        self.l2=len(listavoidy)
+        l3=0
+        self.sizex1=30
+        self.sizey1=30
+        self.x02=random.randint(25,475)
+        self.y02=random.randint(25,375)
+        self.xEnd=self.sizex1+self.x02
+        self.yEnd=self.sizey1+self.y02
+#moves the object if they overlap, currently moves around 90% of the objects out of each other
+        for l in range( self.l1):
+            if listavoidx[l]-self.xEnd<=self.sizex :
+                if self.x02>listavoidx[l]:
+                    self.x02=30+self.x02
+                    self.xEnd=30+self.xEnd
+                else:
+                    self.x02=self.x02-30
+                    self.xEnd= self.xEnd-30
+            if listavoidy[l]-self.yEnd <=self.sizey:
+                if self.y02<=listavoidy[l]:
+                    self.y02=self.y02-30
+                    self.yEnd=self.yEnd-30
+                else:
+                    self.y02=self.y02+30
+                    self.yEnd=self.yEnd +30
+            if self.x02<25:
+                self.x02=(30)+self.x0
+                self.xEnd=(30)+self.xEnd                
+            if self.xEnd>450:
+                self.x02=self.x02-(30)
+                self.xEnd=self.xEnd-(30)
+            if self.y02<25:
+                self.y02=(30)+self.y02
+                self.xEnd=(30)+self.xEnd
+            if self.yEnd>350:
+                self.y02=self.y02-30 
+                self.yEnd=self.yEnd-30  
+       
+        listavoidx.append (self.x02)
+        listavoidy.append (self.y02)
+        self.shape1 = canvas.create_oval(self.x02, self.y02, self.xEnd, self.yEnd, fill='dark green')
+        return(self.l1)
+
+class robot(object1):
+    def __init__(self,x=50,y0=50,sizex=4,sizey=4,colour='blue'):
+        self.x0=x0
+        self.y0=y0
+        self.sizex=sizex
+        self.sizey=sizey
+        self.colour=colour
+#creates the robot
+    def drawRobot(self, canvas): 
+        self.canvas = canvas
+        self.shape = canvas.create_oval(self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey, fill=self.colour)
+#the robot's movement code
+    def roam(self):
+        l4=len(listavoidx1)
+        ob=0
+        large=0
+        #finds an object and sets the destination coords as it
+        while listavoidx1[l4-1] != listavoidx1[large+ob] and len(listavoidx1)>0 :
+            odx1=listavoidx1[large]
+            ody1=listavoidy1[large]
+            ox0=(odx1+15)-self.x0
+            oy0=(ody1+15)-self.y0
+            ox01=(listavoidx[large+ob]+15)-self.x0
+            oy01=(listavoidy[large+ob]+15)-self.y0
+            od0=math.sqrt(ox0**2+oy0**2)
+            od01=math.sqrt(ox01**2+oy01**2)
+            if  od0>=od01:
+                large=large+ob
+                ob=1        
+            else:
+                ob=ob+1
+        if len(listavoidx1)==1:
+            odx1=listavoidx1[0]
+            ody1=listavoidy1[0]
+            ox0=(odx1+15)-self.x0
+            oy0=(ody1+15)-self.y0
+            ox01=(listavoidx[large+ob]+15)-self.x0
+            oy01=(listavoidy[large+ob]+15)-self.y0
+            od0=math.sqrt(ox0**2+oy0**2)
+            od01=math.sqrt(ox01**2+oy01**2)
+            if  od0>=od01:
+                large=large+ob
+                ob=1        
+            else:
+                ob=ob+1        
+        #uses the coords set before and pythagoras theoremto go towards the object  
+        self.x01=ox0
+        if self.x01>0: 
+            self.y01=oy0
+            if self.y01<0:
+                hyp1=math.sqrt(self.x01**2+self.y01**2)
+                ang1=math.acos(abs(self.x01)/hyp1)
+                lg1=hyp1/5
+                movx1=(hyp1/lg1*math.cos(ang1))
+                movy1=-(hyp1/lg1*(math.cos(90-ang1)))
+            if self.y01>0:
+                hyp1=math.sqrt(self.x01**2+self.y01**2)
+                ang1=math.acos(abs(self.x01)/hyp1)
+                lg1=hyp1/5
+                movx1=(hyp1/lg1*math.cos(ang1))
+                movy1=(hyp1/lg1*math.cos(90-ang1))
+        if self.x01<0: 
+            self.y01=oy0
+            if self.y01<0:
+                hyp1=math.sqrt(self.x01**2+self.y01**2)
+                ang1=math.acos(abs(self.x01)/hyp1)
+                lg1=hyp1/5
+                movx1=-(hyp1/lg1*math.cos(ang1))
+                
+                movy1=-(hyp1/lg1*(math.cos(90-ang1)))
+            if self.y01>0:
+                hyp1=math.sqrt(self.x01**2+self.y01**2)
+                ang1=math.acos(abs(self.x01)/hyp1)
+                lg1=hyp1/5
+                movx1=-(hyp1/lg1*math.cos(ang1))
+                movy1=(hyp1/lg1*math.cos(90-ang1))
+
+        # uses the coords of the object and pythagoras theorem to see the distance of each object to the robot and then avoids if the distance les then 20
+        for m in range(self.l1):
+            ox1=(listavoidx[m]+15)-(self.x0)
+            oy1=(listavoidy[m]+15)-(self.y0)
+            od1=math.sqrt(ox1**2+oy1**2)
+            if od1<20:
+                for b in range(2):
+                    if ox1>0:
+                        if oy1>0:
+                            movy1=-random.randint(6,6)
+                            movx1=-random.randint(-6,6)
+                            for b in range(2):
+                                self.x0+=movx1
+                                self.y0+=movy1
+                                self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
+                                self.canvas.update()
+                                time.sleep(0.1)
+
+                        if oy1<0:
+                            movy1=random.randint(6,6)
+                            movx1=-random.randint(-6,6)
+
+                            for b in range(2):
+                                self.x0+=movx1
+                                self.y0+=movy1
+                                self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
+                                self.canvas.update()
+                                time.sleep(0.1)
+                    if ox1<0:
+                        if oy1>0:
+                            movy1=-random.randint(6,6)
+                            movx1=random.randint(-6,6)
+                            for b in range(2):
+                                self.x0+=movx1
+                                self.y0+=movy1
+                                self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
+                                self.canvas.update()
+                                time.sleep(0.1)
+                        if oy1<0:
+                            movy1=random.randint(6,6)
+                            movx1=random.randint(-6,6)
+                            for b in range(2):
+                                self.x0+=movx1
+                                self.y0+=movy1
+                                self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
+                                self.canvas.update()
+                                time.sleep(0.1)
+
+       
+
+        if math.sqrt((ox0)**2+(oy0)**2)<25:
+            listavoidx1.remove(odx1)
+            listavoidy1.remove(ody1)
+
+        self.x0+=movx1
+        self.y0+=movy1
+
+
+
+
+        self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
+        self.canvas.update()
+        return(self.x01,self.y01,movx1,movy1)              
+
+# the traffic light appears every 250 cycles and stops the code
+    def traffic(self):
+        if i==250 or i==500 or i==750:
+            self.OR = canvas.create_oval(self.x0+20,self.y0+10,self.x0+40,self.y0-10, fill='red')
+            self.canvas.update()
+            time.sleep(1)
+            self.canvas.delete(self.OR)
+            self.OA = canvas.create_oval(self.x0+20,self.y0+10,self.x0+40,self.y0-10, fill='yellow')
+            self.canvas.update()
+            time.sleep(1)
+            self.canvas.delete(self.OA)
+            self.OG = canvas.create_oval(self.x0+20,self.y0+10,self.x0+40,self.y0-10, fill='green')
+            self.canvas.update()
+            time.sleep(0.5)
+            self.canvas.delete(self.OG)       
+
+class treasure(robot):
+    def __init__(self,x0=random.randint(50,400),y0=0,sizex=4,sizey=4,colour='blue'):
+        self.x0=x0
+        
+        self.y0=y0
+        self.sizex=sizex
+        self.sizey=sizey
+        self.colour=colour
+    #creates the treasure on top of one of the objects    
+    def createTreasure(self,canvas):
+        rv=random.randint(0,self.l1)
+        rn=random.randint(0,300)
+        self.tx1=listavoidx[rv]
+        self.ty1=listavoidy[rv]
+        if 0<=rn<100:
+            self.tr1=self.tr1=canvas.create_oval(self.tx1+10,self.ty1+10,self.tx1+20,self.ty1+20,fill='gold')
+        if 100<=rn<200:
+            self.tr1=self.tr1=canvas.create_rectangle(self.tx1+10,self.ty1+10,self.tx1+20,self.ty1+20,fill='orange')
+        if 200<=rn<300:
+             self.tr1=canvas.create_arc(self.tx1,self.ty1+10,self.tx1+20,self.ty1+30,fill='gold')
+        listvalue.append(rn)
+
+        return (self.tr1)
+
+
+      
+
+    #when the robot finds the treasure, the treasure moves to another location and the list of searched objects resets
+    def changeTreasure(self):
+        global score
+        global listavoidx1
+        global listavoidy1
+        dis1=math.sqrt((self.x0-(self.tx1+10))**2+(self.y0-(self.ty1+10))**2)
+        if dis1<27:
+            rv=random.randint(0,self.l1)
+            del listavoidx1[:]
+            del listavoidy1[:]
+            self.tx1=listavoidx[rv]
+            self.ty1=listavoidy[rv]
+            canvas.delete(self.tr1)
+            self.createTreasure(canvas)
+            canvas.update()
+            score+=1
+            listavoidx1=copy.copy(listavoidx)
+            listavoidy1=copy.copy(listavoidy)
+            time.sleep(1)
+
+
+    def score2(self):
+        global score
+        d1t=math.sqrt((self.x0-self.tx1)**2+(self.y0-self.ty1)**2)
+        score1.config(text="the amount of times the treasure has be found is %s" %(score))
+        score1.pack()
+
+try1=treasure()
+try1.drawRobot(canvas)
+for h in range (10):
+    try1.drawObstacle(canvas)
+try1.createTreasure(canvas)
+listavoidx1=list(listavoidx)
+listavoidy1=list(listavoidy)
+for i in range (1000):
+    try1.changeTreasure()
+    try1.roam()
+    try1.traffic()
+    try1.score2()
+    time.sleep(0.1)
+
+window.mainloop()
