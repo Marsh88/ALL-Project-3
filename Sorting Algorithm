@@ -1,0 +1,13 @@
+#Defining the quick sort function 'qiksort'
+
+def qiksort(list):
+    """ Quicksort a list
+    """
+    if not list:
+        return []
+
+    pivots = [x for x in list if x == list[0]]
+    lesser = qiksort([x for x in list if x < list[0]])
+    greater = qiksort([x for x in list if x > list[0]])
+
+    return [lesser] + pivots + [greater]
