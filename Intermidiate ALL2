@@ -1,4 +1,5 @@
 
+
 import random
 import time
 import math
@@ -324,16 +325,17 @@ canvas.delete("all")
 canvas.update()
 widget = Label(canvas, text=('The unsorted values are:',listvalue ), fg='black', bg='white')
 widget.pack()
-1x=50
-1y=100
+x10=50
+y10=100
 for vl in range(len(listvalue)):
         if 0<=listvalue[vl]<100:
-            canvas.create_oval(1x,1y,1x+20,1y+20,fill='gold')
+            canvas.create_oval(x10,y10,x10+50,y10+50,fill='yellow')
         if 100<=listvalue[vl]<200:
-            self.tr1=canvas.create_rectangle (1x,1y,1x+20,1y+20,fill='orange')
+            canvas.create_rectangle (x10,y10,x10+50,y10+50,fill='orange')
         if 200<=listvalue[vl]<300:
-            canvas.create_arc(1x,1y,1x+20,1y+20,fill='gold')
-        1x+=20
+            canvas.create_arc(x10,y10,x10+50,y10+50,fill='gold')
+        x10+=50
+        
         
                 
 canvas.update()
