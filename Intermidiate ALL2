@@ -28,7 +28,7 @@ gif1 = tk.PhotoImage(data=b64_data)
 
 # Create the canvas
 
-canvas = Canvas(width = 500, height = 400, bg = 'white')
+canvas = Canvas(width = 500, height = 450, bg = 'white')
 
 # Pack the canvas into a frame/form
 
