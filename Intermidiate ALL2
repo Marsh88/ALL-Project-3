@@ -17,7 +17,7 @@ score=0
 score1=Label(window, text="the amount of times the treasure has be found is %s")
 # Use urllib to access a public url and import it through base64 as a .gif image usable in Tkinter (the file has to be formatted as a .gif to begin with)
 
-URL = "https://djaspermorris.files.wordpress.com/2015/01/seawaves.gif"
+URL = "https://covweb1.files.wordpress.com/2014/10/test.gif"
 u = urllib.urlopen(URL)
 raw_data = u.read()
 u.close()
