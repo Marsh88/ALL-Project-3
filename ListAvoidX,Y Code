@@ -11,14 +11,14 @@
         self.yEnd=self.sizey1+self.y02
 #moves the object if they overlap
         for l in range( self.l1):
-            if listavoidx[l]-self.xEnd<=self.sizex1 :
+            if listavoidx[0]-self.xEnd<=self.sizex1 :
                 if self.x02>listavoidx[l]:
                     self.x02=30+self.x02
                     self.xEnd=30+self.xEnd
                 else:
                     self.x02=self.x02-30
                     self.xEnd= self.xEnd-30
-            if listavoidy[l]-self.yEnd <=self.sizey1:
+            if listavoidy[0]-self.yEnd <=self.sizey1:
                 if self.y02<=listavoidy[l]:
                     self.y02=self.y02-30
                     self.yEnd=self.yEnd-30
