@@ -3,11 +3,9 @@
 def qiksort(list):
     """ Quicksort a list
     """
-    if not list:
+    if list == []: 
         return []
-
-    pivots = [x for x in list if x == list[0]]
-    lesser = qiksort([x for x in list if x < list[0]])
-    greater = qiksort([x for x in list if x > list[0]])
-
-    return [lesser] + pivots + [greater]
+    pivot = list[0]
+    lesser = qiksort([x for x in list[1:] if x < pivot])
+    greater = qiksort([x for x in list[1:] if x >= pivot])
+    return lesser + [pivot] + greater
