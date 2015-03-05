@@ -1,5 +1,3 @@
-
-
 import random
 import time
 import math
@@ -51,7 +49,7 @@ class object1:
         self.colour=colour
 
 
-#this creates the obstacles through random generation
+#creates the obstacles through random generation
     def drawObstacle(self, canvas):
         self.l1=len(listavoidx)
         self.l2=len(listavoidy)
@@ -62,16 +60,16 @@ class object1:
         self.y02=random.randint(25,375)
         self.xEnd=self.sizex1+self.x02
         self.yEnd=self.sizey1+self.y02
-#moves the object if they overlap, currently moves around 90% of the objects out of each other
+#moves the object if they overlap
         for l in range( self.l1):
-            if listavoidx[l]-self.xEnd<=self.sizex :
+            if listavoidx[0]-self.xEnd<=self.sizex1 :
                 if self.x02>listavoidx[l]:
                     self.x02=30+self.x02
                     self.xEnd=30+self.xEnd
                 else:
                     self.x02=self.x02-30
                     self.xEnd= self.xEnd-30
-            if listavoidy[l]-self.yEnd <=self.sizey:
+            if listavoidy[0]-self.yEnd <=self.sizey1:
                 if self.y02<=listavoidy[l]:
                     self.y02=self.y02-30
                     self.yEnd=self.yEnd-30
@@ -244,10 +242,6 @@ class robot(object1):
             self.canvas.update()
             time.sleep(1)
             self.canvas.delete(self.OR)
-            self.OA = canvas.create_oval(self.x0+20,self.y0+10,self.x0+40,self.y0-10, fill='yellow')
-            self.canvas.update()
-            time.sleep(1)
-            self.canvas.delete(self.OA)
             self.OG = canvas.create_oval(self.x0+20,self.y0+10,self.x0+40,self.y0-10, fill='green')
             self.canvas.update()
             time.sleep(0.5)
@@ -333,8 +327,8 @@ for vl in range(len(listvalue)):
         if 100<=listvalue[vl]<200:
             canvas.create_rectangle (x10,y10,x10+50,y10+50,fill='orange')
         if 200<=listvalue[vl]<300:
-            canvas.create_arc(x10,y10,x10+50,y10+50,fill='gold')
-        x10+=50
+            canvas.create_arc(x10,y10,x10+70,y10+70,fill='gold')
+        x10+=80
         
         
                 
