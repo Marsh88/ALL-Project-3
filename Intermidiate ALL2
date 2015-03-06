@@ -301,6 +301,7 @@ class treasure(robot):
         score1.config(text="the amount of times the treasure has be found is %s" %(score))
         score1.pack()
 
+
 try1=treasure()
 try1.drawRobot(canvas)
 for h in range (10):
@@ -329,12 +330,42 @@ for vl in range(len(listvalue)):
         if 200<=listvalue[vl]<300:
             canvas.create_arc(x10,y10,x10+70,y10+70,fill='gold')
         x10+=80
-        
-#Simple Sort
-listvalue.sort()
+
+def partition(array, start, end, pivotx):
+
+    if not (start <= pivotx <= end):
+        raise ValueError('pivotx must be inbetween the start and end')
+
+    array[start], array[pivotx] = array[pivotx], array[start]
+    pivot = array[start]
+    i = start + 1
+    j = start + 1
+
+    while j <= end:
+        if array[j] <= pivot:
+            array[j], array[i] = array[i], array[j]
+            i += 1
+        j += 1
+
+    array[start], array[i - 1] = array[i - 1], array[start]
+    return i - 1
+
+def qiksort(array, start=0, end=None):
+
+    if end is None:
+        end = len(array) - 1
+
+    if end - start < 1:
+        return
+
+    pivotx = random.randint(start, end)
+    i = partition(array, start, end, pivotx)
+    qiksort(array, start, i - 1)
+    qiksort(array, i + 1, end)
+
+qiksort(listvalue)
 print listvalue
 
 canvas.update()
-
 
 window.mainloop()
