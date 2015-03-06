@@ -330,8 +330,10 @@ for vl in range(len(listvalue)):
             canvas.create_arc(x10,y10,x10+70,y10+70,fill='gold')
         x10+=80
         
-        
-                
+#Simple Sort
+listvalue.sort()
+print listvalue
+
 canvas.update()
 
 
