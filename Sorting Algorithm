@@ -1,16 +1,31 @@
-#Defining the quick sort function 'qiksort' using list comprehension, as recursion seems to be much slower.
-#This is assumably because list comprehension implies C loop, which is faster than Python's 'for' block.
+def partition(array, start, end, pivotx):
 
-def qiksort(list):
-    #This is just effectively a description of the function.
-    """ Quicksort a list
-    """
-    if list == []: 
-        return []
-    pivot = list[0]
-    lesser = qiksort([x for x in list[1:] if x < pivot])
-    greater = qiksort([x for x in list[1:] if x >= pivot])
-    return lesser + [pivot] + greater
+    if not (start <= pivotx <= end):
+        raise ValueError('pivotx must be inbetween the start and end')
 
-#If you don't understand quicksort: http://www.algolist.net/Algorithms/Sorting/Quicksort
-#In a more clear but slower code you can create a partition function that the qiksort utilises. In this example it is just a direct part of the code.
+    array[start], array[pivotx] = array[pivotx], array[start]
+    pivot = array[start]
+    i = start + 1
+    j = start + 1
+
+    while j <= end:
+        if array[j] <= pivot:
+            array[j], array[i] = array[i], array[j]
+            i += 1
+        j += 1
+
+    array[start], array[i - 1] = array[i - 1], array[start]
+    return i - 1
+
+def qiksort(array, start=0, end=None):
+
+    if end is None:
+        end = len(array) - 1
+
+    if end - start < 1:
+        return
+
+    pivotx = random.randint(start, end)
+    i = partition(array, start, end, pivotx)
+    qiksort(array, start, i - 1)
+    qiksort(array, i + 1, end)
