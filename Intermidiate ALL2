@@ -324,13 +324,14 @@ x10=50
 y10=100
 for vl in range(len(listvalue)):
         if 0<=listvalue[vl]<100:
-            canvas.create_oval(x10,y10,x10+50,y10+50,fill='yellow')
+            canvas.create_oval(x10,y10,x10+50,y10+50,fill='gold')
         if 100<=listvalue[vl]<200:
-            canvas.create_rectangle (x10,y10,x10+50,y10+50,fill='orange')
+            canvas.create_rectangle (x10,y10,x10+50,y10+50,fill='gold')
         if 200<=listvalue[vl]<300:
             canvas.create_arc(x10,y10,x10+70,y10+70,fill='gold')
         x10+=80
-
+canvas.update()
+time.sleep(20)
 def partition(array, start, end, pivotx):
 
     if not (start <= pivotx <= end):
@@ -356,16 +357,28 @@ def qiksort(array, start=0, end=None):
         end = len(array) - 1
 
     if end - start < 1:
-        return
+        return(array)
 
     pivotx = random.randint(start, end)
     i = partition(array, start, end, pivotx)
-    qiksort(array, start, i - 1)
-    qiksort(array, i + 1, end)
-
-qiksort(listvalue)
-print listvalue
-
+    qiksort(array, i + 1, i-1)
+canvas.delete("all")
 canvas.update()
+qiksort1=qiksort(listvalue)
+widget = Label(canvas, text=('The sorted values are:',listvalue ), fg='black', bg='white')
+widget.pack()
+x10=50
+y10=100
+print listvalue
+for vl in range(len(listvalue)):
+        if 0<=listvalue[vl]<100:
+            canvas.create_oval(x10,y10,x10+50,y10+50,fill='gold')
+        if 100<=listvalue[vl]<200:
+            canvas.create_rectangle (x10,y10,x10+50,y10+50,fill='gold')
+        if 200<=listvalue[vl]<300:
+            canvas.create_arc(x10,y10,x10+70,y10+70,fill='gold')
+        x10+=80
+canvas.update()
+
 
 window.mainloop()
