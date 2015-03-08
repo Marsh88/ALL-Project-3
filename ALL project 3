@@ -132,17 +132,17 @@ def main1(va,vb):
                         self.y02=self.y02+30
                         self.yEnd=self.yEnd +30
                 if self.x02<25:
-                    self.x02=(30)+self.x0
-                    self.xEnd=(30)+self.xEnd                
+                    self.x02=(35)+self.x0
+                    self.xEnd=(35)+self.xEnd                
                 if self.xEnd>450:
-                    self.x02=self.x02-(30)
-                    self.xEnd=self.xEnd-(30)
+                    self.x02=self.x02-(35)
+                    self.xEnd=self.xEnd-(35)
                 if self.y02<25:
-                    self.y02=(30)+self.y02
-                    self.xEnd=(30)+self.xEnd
+                    self.y02=(35)+self.y02
+                    self.xEnd=(35)+self.xEnd
                 if self.yEnd>350:
-                    self.y02=self.y02-30 
-                    self.yEnd=self.yEnd-30  
+                    self.y02=self.y02-35 
+                    self.yEnd=self.yEnd-35  
            
             listavoidx.append (self.x02)
             listavoidy.append (self.y02)
@@ -368,7 +368,7 @@ def main1(va,vb):
                 global tr1
 
                 lis1=len(listavoidx)
-                rv=random.randint(0,lis1)
+                rv=random.randint(0,lis1-1)
                 ra=random.randint(0,100)
                 tx1=listavoidx[rv]
                 ty1=listavoidy[rv]
@@ -388,7 +388,7 @@ def main1(va,vb):
                 global tr1
 
                 lis1=len(listavoidx)
-                rv=random.randint(0,lis1)
+                rv=random.randint(0,lis1-1)
                 ra=random.randint(100,200)
                 tx1=listavoidx[rv]
                 ty1=listavoidy[rv]
@@ -408,11 +408,11 @@ def main1(va,vb):
                 global tr1
 
                 lis1=len(listavoidx)
-                rv=random.randint(0,lis1)
+                rv=random.randint(0,lis1-1)
                 ra=random.randint(200,300)
                 tx1=listavoidx[rv]
                 ty1=listavoidy[rv]
-                tr1=canvas.create_arc(tx1+10,ty1+10,tx1+20,ty1+20,fill='gold')
+                tr1=canvas.create_arc(tx1,ty1+10,tx1+20,ty1+30,fill='gold')
                 listvalue.append(ra)
 
 
@@ -433,7 +433,7 @@ def main1(va,vb):
     if vb+va<=rav<100:
         tres3.create()
 
-    print tx1
+
     listavoidx1=list(listavoidx)
     listavoidy1=list(listavoidy)
     try1.drawRobot(canvas)
@@ -459,7 +459,7 @@ def main1(va,vb):
                 canvas.create_arc(x10,y10,x10+70,y10+70,fill='gold')
             x10+=80
     canvas.update()
-    time.sleep(20)
+    time.sleep(10)
     def partition(array, start, end, pivotx):
 
         if not (start <= pivotx <= end):
@@ -485,11 +485,14 @@ def main1(va,vb):
             end = len(array) - 1
 
         if end - start < 1:
-            return(array)
+            return
 
         pivotx = random.randint(start, end)
         i = partition(array, start, end, pivotx)
-        qiksort(array, i + 1, i-1)
+        qiksort(array, start, i - 1)
+        qiksort(array, i + 1, end)
+        x10=50
+        y10=100
     canvas.delete("all")
     canvas.update()
     qiksort1=qiksort(listvalue)
@@ -497,7 +500,7 @@ def main1(va,vb):
     widget.pack()
     x10=50
     y10=100
-    print listvalue
+
     for vl in range(len(listvalue)):
             if 0<=listvalue[vl]<100:
                 canvas.create_oval(x10,y10,x10+50,y10+50,fill='gold')
@@ -507,6 +510,7 @@ def main1(va,vb):
                 canvas.create_arc(x10,y10,x10+70,y10+70,fill='gold')
             x10+=80
     canvas.update()
+    
 
 
 window.mainloop()
