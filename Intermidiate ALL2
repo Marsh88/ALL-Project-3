@@ -7,6 +7,12 @@ import base64
 from Tkinter import*
 import Tkinter as tk
 window = Tk()
+listavoidx=[]
+listavoidy=[]
+listvalue=[]
+ob1=1
+score=0
+score1=Label(window, text="the amount of times the treasure has be found is %s")
 
 
 # Use urllib to access a public url and import it through base64 as a .gif image usable in Tkinter (the file has to be formatted as a .gif to begin with)
@@ -58,7 +64,7 @@ def slider2(ta):
 
 
 def prob1(a,b):
-
+    canvas.delete(all)
     widget1 = Label( window,text=('The probability of the low treasure happening is:',a,"%"), fg='black', bg='white')
     widget1.pack(anchor=CENTER)
     widget2 = Label(window,text=('The probability of the medium treasure happening is:',b ,"%"), fg='black', bg='white')
@@ -73,12 +79,7 @@ def prob1(a,b):
 slider1()
 def main1(va,vb):
     vc=100-(va+vb)
-    listavoidx=[]
-    listavoidy=[]
-    listvalue=[]
-    ob1=1
-    score=0
-    score1=Label(window, text="the amount of times the treasure has be found is %s")
+
     
 
 
@@ -95,6 +96,8 @@ def main1(va,vb):
 
     #creates the obstacles through random generation
         def drawObstacle(self, canvas):
+            global listavoidx1
+            global listavoidy1
             self.l1=len(listavoidx)
             self.l2=len(listavoidy)
             l3=0
@@ -135,6 +138,8 @@ def main1(va,vb):
            
             listavoidx.append (self.x02)
             listavoidy.append (self.y02)
+            listavoidx1=list(listavoidx)
+            listavoidy1=list(listavoidy)
             self.shape1 = canvas.create_oval(self.x02, self.y02, self.xEnd, self.yEnd, fill='dark green')
             return(self.l1)
 
@@ -151,6 +156,8 @@ def main1(va,vb):
             self.shape = canvas.create_oval(self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey, fill=self.colour)
     #the robot's movement code
         def roam(self):
+            global listavoidx1
+            global listavoidy1
             l4=len(listavoidx1)
             ob=0
             large=0
@@ -308,15 +315,20 @@ def main1(va,vb):
             if 0<=rn<va:
                 self.tr1=self.tr1=canvas.create_oval(self.tx1+10,self.ty1+10,self.tx1+20,self.ty1+20,fill='gold')
                 ra=random.randint(0,100)
+                listvalue.append(ra)
+                return (self.tr1)
             if va<=rn<vb:
                 self.tr1=self.tr1=canvas.create_rectangle(self.tx1+10,self.ty1+10,self.tx1+20,self.ty1+20,fill='orange')
                 ra=random.randint(100,200)
+                listvalue.append(ra)
+                return (self.tr1)
             if vb<=rn<vc:
                  self.tr1=canvas.create_arc(self.tx1,self.ty1+10,self.tx1+20,self.ty1+30,fill='gold')
                  ra=random.randint(200,300)
-            listvalue.append(ra)
+                 listvalue.append(ra)
+                 return (self.tr1)
 
-            return (self.tr1)
+            
 
 
           
