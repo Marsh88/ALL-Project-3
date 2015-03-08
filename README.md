@@ -4,9 +4,7 @@ This is our third ALL project for our group, E2, first year BSc Computer Science
 
 Our aim of this project is to further develop our virtual robot that will successfully be able to locate treasures. The code is compatible with Python versions 2.7
 
-All of our code in testing can be found in the "testing" area
-
-All of our finished code can be found in the "finished" area
+This is the location of the finished code which will be used for the Project and the ALL.
 
 Contributers
 
