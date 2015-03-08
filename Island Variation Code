@@ -1,0 +1,45 @@
+   #creates the obstacles through random generation
+        def drawObstacle(self, canvas):
+            self.l1=len(listavoidx)
+            self.l2=len(listavoidy)
+            l3=0
+            self.sizex1=30
+            self.sizey1=30
+            self.x02=random.randint(25,475)
+            self.y02=random.randint(25,375)
+            self.xEnd=self.sizex1+self.x02
+            self.yEnd=self.sizey1+self.y02
+    #moves the object if they overlap
+            for l in range( self.l1):
+                if listavoidx[0]-self.xEnd<=self.sizex1 :
+                    if self.x02>listavoidx[l]:
+                        self.x02=30+self.x02
+                        self.xEnd=30+self.xEnd
+                    else:
+                        self.x02=self.x02-30
+                        self.xEnd= self.xEnd-30
+                if listavoidy[0]-self.yEnd <=self.sizey1:
+                    if self.y02<=listavoidy[l]:
+                        self.y02=self.y02-30
+                        self.yEnd=self.yEnd-30
+                    else:
+                        self.y02=self.y02+30
+                        self.yEnd=self.yEnd +30
+                if self.x02<25:
+                    self.x02=(30)+self.x0
+                    self.xEnd=(30)+self.xEnd                
+                if self.xEnd>450:
+                    self.x02=self.x02-(30)
+                    self.xEnd=self.xEnd-(30)
+                if self.y02<25:
+                    self.y02=(30)+self.y02
+                    self.xEnd=(30)+self.xEnd
+                if self.yEnd>350:
+                    self.y02=self.y02-30 
+                    self.yEnd=self.yEnd-30  
+           
+            listavoidx.append (self.x02)
+            listavoidy.append (self.y02)
+            colours = ['dark green', 'dark olive green','dark sea green', 'sea green', 'medium sea green', 'light sea green', 'spring green','lawn green', 'medium spring green','forest green', 'olive drab', 'dark khaki', 'khaki',]
+            self.shape1 = canvas.create_oval(self.x02, self.y02, self.xEnd, self.yEnd, fill= random.choice(colours))
+            return(self.l1)
